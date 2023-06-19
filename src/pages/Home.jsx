@@ -9,7 +9,7 @@ export const Home = () => {
             <Navbar />
 
 
-            <div className='px-10'>
+            <div className='px-3 sm:px-10'>
 
 
 
