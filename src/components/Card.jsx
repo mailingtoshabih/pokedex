@@ -42,7 +42,15 @@ export const Card = ({ pokemon }) => {
 
                 <div className='w-full -mt-10 '>
                     <Link to={`/details/${pokemon.name}`}>
-                        <img src={pic} className="" alt="" />
+                        {
+                            pic ?
+                                <img src={pic} className="" alt="" />
+                                :
+                                <div className="p-10">
+                                    <p className=" h-5 w-5 animate-ping mx-auto bg-blue-400 rounded-full">
+                                    </p>
+                                </div>
+                        }
                     </Link>
                 </div>
 

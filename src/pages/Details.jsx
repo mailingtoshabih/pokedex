@@ -2,7 +2,7 @@ import baby from "../assets/baby.png"
 import { Navbar } from '../components/Navbar'
 import { Listings } from '../components/Listings'
 import { Footer } from '../components/Footer'
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import axios from "axios"
 import { useEffect, useState } from "react"
 
@@ -30,6 +30,10 @@ export const Details = () => {
     const [save, setSave] = useState(true);
 
 
+    
+
+
+
 
 
     useEffect(() => {
@@ -50,7 +54,7 @@ export const Details = () => {
 
 
 
-    
+
     const handleSave = (e) => {
 
         // if true, then already bookmarked
@@ -84,7 +88,18 @@ export const Details = () => {
                     <div className="p-5 w-72 rounded-xl shadow-2xl shadow-gray-300
                         hover:skew-y-2 duration-700 mx-auto">
 
-                        <img src={pokemon?.sprites?.other?.home?.front_default} className="" alt="" />
+
+                        {
+                            pokemon?.sprites?.other?.home?.front_default ?
+
+                                <img src={pokemon?.sprites?.other?.home?.front_default} className="" alt="" />
+                                :
+                                <div className="py-15 p-10">
+                                    <p className=" h-5 w-5 animate-ping mx-auto bg-blue-400 rounded-full">
+                                    </p>
+                                </div>
+                        }
+
 
 
                         <div className="flex justify-between">
@@ -239,13 +254,20 @@ export const Details = () => {
 
 
 
-
-
-
-
-
-
             </div>
+
+
+
+
+            <div className="mb-10">
+                <Link to="/" className=" px-10 p-5 font-bold text-gray-800 bg-blue-100 rounded-xl ml-12  duration-700
+                hover:bg-violet-950 hover:text-white">
+                    Go Back
+                </Link>
+            </div>
+
+
+
 
 
 
