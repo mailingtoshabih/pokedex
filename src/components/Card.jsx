@@ -34,14 +34,14 @@ export const Card = ({ pokemon }) => {
     return (
         <div className='relative'>
 
+            <Link to={`/details/${pokemon.name}`}>
 
-            <div className='p-4 md:p-10  rounded-xl 
+                <div className='p-4 md:p-10  rounded-xl 
                 shadow-2xl shadow-gray-200 
               hover:shadow-violet-300 duration-500'>
 
 
-                <div className='w-full -mt-10 '>
-                    <Link to={`/details/${pokemon.name}`}>
+                    <div className='w-full -mt-10 '>
                         {
                             pic ?
                                 <img src={pic} className="" alt="" />
@@ -51,28 +51,28 @@ export const Card = ({ pokemon }) => {
                                     </p>
                                 </div>
                         }
-                    </Link>
+                    </div>
+
+
+
+
+                    <div className='flex justify-between mt-5 '>
+
+                        <p className='capitalize text-sm font-semibold text-gray-700 mx-auto'>
+                            {pokemon && pokemon.name}
+                        </p>
+
+
+                    </div>
+
+
+
                 </div>
 
 
 
 
-                <div className='flex justify-between mt-5 '>
-
-                    <p className='capitalize text-sm font-semibold text-gray-700 mx-auto'>
-                        {pokemon && pokemon.name}
-                    </p>
-
-
-                </div>
-
-
-
-            </div>
-
-
-
-
+            </Link>
 
 
 
