@@ -44,7 +44,7 @@ export const Details = () => {
             .then((res) => setPokemon(res.data))
             .catch((e) => console.log(e.message));
 
-    }, []);
+    }, [name]);
 
 
 
@@ -250,19 +250,20 @@ export const Details = () => {
 
                 </div>
 
-
-
-
-
             </div>
 
 
 
 
-            <div className="mb-10">
-                <Link to="/" className=" px-10 p-5 font-bold text-gray-800 bg-blue-100 rounded-xl ml-12  duration-700
+            <div className="mb-10 flex justify-between">
+                <Link to="/" className=" px-10 p-5 font-bold text-gray-800 bg-blue-100 rounded-xl ml-3 sm:ml-12  duration-700
                 hover:bg-violet-950 hover:text-white">
                     Go Back
+                </Link>
+
+                <Link to="/bookmarks" className=" px-10 p-5 font-bold text-gray-800 bg-blue-100 rounded-xl mr-3 sm:mr-12  duration-700
+                hover:bg-violet-950 hover:text-white">
+                    Bookmarks
                 </Link>
             </div>
 

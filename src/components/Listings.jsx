@@ -3,46 +3,38 @@ import axios from 'axios';
 import { Card } from './Card';
 import { Loading } from '../pages/Loading';
 
+import InfiniteScroll from 'react-infinite-scroll-component';
+
+
+
 
 
 export const Listings = () => {
 
 
-    let offset = 0;
-    const [list, setList] = useState(null);
-    const listInnerRef = useRef();
+
+    const [offset, setOffset] = useState(0);
+    const [list, setList] = useState([]);
 
 
-    const handleScroll = (e) => {
+    const fetchData = async () => {
 
-        const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-        if (bottom) {
-            console.log("bottom")
-        }
-
-
+        axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=20`)
+            .then(res => {
+                setList(prev => [...prev, ...res.data.results]);
+                setOffset(offset + 20);
+            })
+            .catch((e) => console.log(e.message));
     }
 
 
 
 
 
-
     useEffect(() => {
+        fetchData();
+    }, []);
 
-        axios.get(
-            `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=1000`)
-            .then(res => {
-                setList(list ? [...list, ...res.data.results] : [...res.data.results]);
-            })
-            .catch((e) => console.log(e.message));
-
-
-
-    }, [offset]);
-
-
-    // dependency - params
 
 
 
@@ -60,29 +52,36 @@ export const Listings = () => {
 
 
 
+            <div>
+                {
+                    list &&
 
-            {
-                list ?
-
-                    <div className='grid grid-cols-2 py-10 gap-8 
-                                    sm:grid-cols-3
-                                    lg:grid-cols-4 xl:grid-cols-5' >
-
+                    <InfiniteScroll
+                        dataLength={list.length}
+                        next={fetchData}
+                        hasMore={true}
+                        loader={<Loading />}>
 
 
 
-                        {
-                            list.slice(0, 20).map((pokemon, idx) => (
-                                <Card key={idx} pokemon={pokemon} />
-                            ))
-                        }
+                        <div className='grid grid-cols-2 py-10 gap-8 
+                        sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5' >
 
-                    </div>
+                            {
+                                list.map((pokemon, idx) => (
+                                    <Card key={idx} pokemon={pokemon} />
+                                ))
+                            }
 
-                    :
+                        </div>
 
-                    <Loading />
-            }
+
+
+                    </InfiniteScroll>
+
+
+                }
+            </div>
 
 
 

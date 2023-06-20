@@ -1,7 +1,81 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios';
+
+
+
+
+
 
 export const Navbar = () => {
+
+    const navigate = useNavigate();
+
+
+    const [pokemonName, setPokemonName] = useState(null);
+    const [search, setSearch] = useState("");
+    const [result, setResult] = useState([]);
+
+
+
+
+
+    const fetchName = async () => {
+        axios.get(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=10000`)
+            .then((res) => setPokemonName(res.data.results.map(p => p.name)))
+            .catch((e) => e.message)
+    }
+
+    useEffect(() => {
+        fetchName();
+    }, [])
+
+
+
+
+
+
+
+
+    const handleSearch = () => {
+
+        if (!search) return;
+
+        if (pokemonName?.includes(search)) {
+
+            axios.get(`https://pokeapi.co/api/v2/pokemon/${search}`)
+                .then((res) => {
+                    setResult(res.data);
+                    navigate(`/details/${search}`);
+                })
+                .catch((e) => e.message);
+        }
+        else {
+            navigate("/notfound");
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     return (
 
         <div className='w-full p-3 sm:p-10 rounded-b-2xl bg-blue-50'>
@@ -11,7 +85,7 @@ export const Navbar = () => {
                 <Link to="/" className='my-auto text-gray-800 text-3xl font-extrabold'>
                     Poke
                     <span className='text-violet-950'>
-                    dex
+                        dex
                     </span>
                 </Link>
 
@@ -35,10 +109,11 @@ export const Navbar = () => {
             <div className='flex'>
 
                 <input type="text" placeholder="Charmander..."
-                    className='mt-10 bg-white h-12 text-gray-600 w-full rounded-l-xl p-5 outline-none font-extralight' />
+                    className='mt-10 bg-white h-12 text-gray-600 w-full rounded-l-xl p-5 outline-none font-extralight' onChange={(e) => setSearch(e.target.value)} />
 
                 <div className='mt-10 h-12 p-3 bg-violet-950 text-white px-10 rounded-r-xl cursor-pointer
-                    hover:bg-violet-900 hover:shadow-xl hover:shadow-violet-300 duration-700'>
+                    hover:bg-violet-900 hover:shadow-xl hover:shadow-violet-300 duration-700'
+                    onClick={handleSearch}>
                     Find
                 </div>
 

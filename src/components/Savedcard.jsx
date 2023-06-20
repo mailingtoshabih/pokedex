@@ -11,42 +11,30 @@ import axios from 'axios'
 export const Savedcard = ({ pokemon }) => {
 
     const [pic, setPic] = useState(null);
-    const [save, setSave] = useState(true);
 
 
 
-
+    const handleSave = (e) => {
+        localStorage.removeItem(pic?.id);
+        window.location.reload();
+    }
 
 
 
     useEffect(() => {
 
         axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
-            .then((res) => setPic(res.data.sprites.other.home.front_default))
+            .then((res) => setPic(res.data))
             .catch((e) => console.log(e.message));
 
     }, [pokemon])
 
 
-    useEffect(() => {
-        setSave(localStorage.getItem(pokemon?.id) === name);
-    }, [pokemon]);
 
 
 
 
-    const handleSave = (e) => {
 
-        // if true, then already bookmarked
-        if (save) {
-            localStorage.removeItem(pokemon?.id)
-            setSave(!save);
-        }
-        else {
-            localStorage.setItem(pokemon.id, pokemon.name);
-            setSave(!save);
-        }
-    }
 
 
 
@@ -64,10 +52,10 @@ export const Savedcard = ({ pokemon }) => {
 
 
                 <div className='w-full -mt-10 '>
-                    <Link to={`/details/${pokemon.name}`}>
+                    <Link to={`/details/${pic?.name}`}>
                         {
                             pic ?
-                                <img src={pic} className="" alt="" />
+                                <img src={pic.sprites.other.home.front_default} className="" alt="" />
                                 :
                                 <div className="p-10">
                                     <p className=" h-5 w-5 animate-ping mx-auto bg-blue-400 rounded-full">
@@ -86,29 +74,18 @@ export const Savedcard = ({ pokemon }) => {
 
                         <p>{pokemon && pokemon}</p>
 
-                        <div  onClick={handleSave}>
+                        <div className="cursor-pointer" onClick={handleSave}>
                             {
-                                !save ?
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-                                        className="w-5 h-5">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
-                                    </svg>
-                                    :
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                        className="w-5 h-5">
-                                        <path fillRule="evenodd" d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z" clipRule="evenodd" />
-                                    </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    className="w-5 h-5">
+                                    <path fillRule="evenodd" d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z" clipRule="evenodd" />
+                                </svg>
                             }
                         </div>
 
-
                     </div>
 
-
                 </div>
-
-
 
             </div>
 

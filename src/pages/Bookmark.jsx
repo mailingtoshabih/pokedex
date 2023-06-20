@@ -16,6 +16,9 @@ export const Bookmark = () => {
 
 
     useEffect(() => {
+
+        window.scroll(0,0);
+
         const local = { ...localStorage };
 
         const savedList = Object.entries(local).map(([k, v]) => ({
@@ -26,13 +29,7 @@ export const Bookmark = () => {
     }, [])
 
 
-    list && console.log(list)
-
-
-
-
-
-
+    
 
 
 
@@ -77,7 +74,7 @@ export const Bookmark = () => {
 
                                 {
                                     list?.map((pokemon, idx) => (
-                                        <Savedcard key={idx} pokemon={pokemon.v}  />
+                                        <Savedcard key={idx} id={pokemon.id} pokemon={pokemon.v}  />
                                     ))
                                 }
 

@@ -6,6 +6,8 @@ import {
 import { Home } from './pages/Home';
 import { Bookmark } from "./pages/Bookmark";
 import { Details } from "./pages/Details";
+import { Notfound } from "./components/Notfound";
+import {Errorpage} from "./pages/Errorpage";
 
 
 
@@ -19,17 +21,22 @@ function App() {
     {
       path: "/",
       element: <Home /> ,
-      // errorElement: <Errorpage />
+      errorElement: <Errorpage />
     },
     {
       path: "/bookmarks",
       element: <Bookmark/> ,
-      // errorElement: <Errorpage />
+      errorElement: <Errorpage />
     },
     {
       path: "/details/:name",
       element: <Details/> ,
-      // errorElement: <Errorpage />
+      errorElement: <Errorpage />
+    },
+    {
+      path: "/notfound",
+      element: <Notfound/> ,
+      errorElement: <Errorpage />
     },
     
 
