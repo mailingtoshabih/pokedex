@@ -21,16 +21,20 @@ import { useEffect, useState } from "react"
 
 export const Details = () => {
 
+
+
     const { name } = useParams();
 
     const [pokemon, setPokemon] = useState(null);
-
     const [tab, setTab] = useState(true);
+    const [save, setSave] = useState(true);
+
+
 
 
     useEffect(() => {
 
-        window.scroll(0,0);
+        window.scroll(0, 0);
 
         axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
             .then((res) => setPokemon(res.data))
@@ -39,8 +43,30 @@ export const Details = () => {
     }, []);
 
 
+
+    useEffect(() => {
+        setSave(localStorage.getItem(pokemon?.id) === name);
+    }, [pokemon]);
+
+
+
     
-  
+    const handleSave = (e) => {
+
+        // if true, then already bookmarked
+        if (save) {
+            localStorage.removeItem(pokemon?.id)
+            setSave(!save);
+        }
+        else {
+            localStorage.setItem(pokemon.id, pokemon.name);
+            setSave(!save);
+        }
+    }
+
+
+
+
 
 
 
@@ -67,7 +93,7 @@ export const Details = () => {
                                 {pokemon && pokemon?.name}
 
                                 <div className="mt-2 flex space-x-2">
-                                    {pokemon && pokemon.types.map( (n, idx) =>
+                                    {pokemon && pokemon.types.map((n, idx) =>
                                         <p key={idx} className="bg-blue-100 px-3 text-sm rounded-full">{n.type.name}</p>
                                     )}
                                 </div>
@@ -76,11 +102,30 @@ export const Details = () => {
 
 
                             {/* bookmarks */}
-                            <div className="mt-6">
+                            {/* <div className="mt-6">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                     className="w-6 h-6">
                                     <path fillRule="evenodd" d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z" clipRule="evenodd" />
                                 </svg>
+                            </div> */}
+
+
+
+                            <div className='mt-7 duration-500 ' onClick={handleSave}>
+                                {
+                                    !save ?
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+                                            className="w-5 h-5">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+                                        </svg>
+                                        :
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                            className="w-5 h-5">
+                                            <path fillRule="evenodd" d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z" clipRule="evenodd" />
+                                        </svg>
+                                }
+
                             </div>
 
                         </div>
@@ -118,7 +163,7 @@ export const Details = () => {
                                 <p className="my-1 font-semibold capitalize">{s.stat.name}</p>
                                 <p>{s.base_stat}</p>
 
-                                
+
                             </div>
                         ))
                     }

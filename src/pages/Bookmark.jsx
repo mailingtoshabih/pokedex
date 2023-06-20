@@ -25,7 +25,7 @@ export const Bookmark = () => {
                 </p>
 
 
-                <Listings />
+                {/* <Listings /> */}
 
 
 
