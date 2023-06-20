@@ -4,6 +4,8 @@ import {
 } from "react-router-dom";
 
 import { Home } from './pages/Home';
+import { Bookmark } from "./pages/Bookmark";
+import { Details } from "./pages/Details";
 
 
 
@@ -19,10 +21,19 @@ function App() {
       element: <Home /> ,
       // errorElement: <Errorpage />
     },
+    {
+      path: "/bookmarks",
+      element: <Bookmark/> ,
+      // errorElement: <Errorpage />
+    },
+    {
+      path: "/details/:name",
+      element: <Details/> ,
+      // errorElement: <Errorpage />
+    },
     
 
   ]);
-
 
 
 

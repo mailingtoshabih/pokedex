@@ -1,11 +1,17 @@
 import React from 'react'
 import { Navbar } from '../components/Navbar'
-import { Listings } from '../components/Listings'
+import { Listings} from '../components/Listings'
 import { Footer } from '../components/Footer'
 
-export const Home = () => {
-    return (
 
+
+
+
+
+
+
+export const Bookmark = () => {
+    return (
         <div>
             <Navbar />
 
@@ -14,10 +20,10 @@ export const Home = () => {
 
 
 
-
                 <p className='my-5 text-gray-800 text-2xl font-light'>
-                    All Pokemons
+                    Saved Pokemons
                 </p>
+
 
                 <Listings />
 

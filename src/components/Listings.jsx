@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import axios from 'axios';
 import { Card } from './Card';
 import { Loading } from '../pages/Loading';
@@ -8,21 +8,40 @@ import { Loading } from '../pages/Loading';
 export const Listings = () => {
 
 
-
+    let offset = 0;
     const [list, setList] = useState(null);
+    const listInnerRef = useRef();
+
+
+    const handleScroll = (e) => {
+
+        const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+        if (bottom) {
+            console.log("bottom")
+        }
+
+
+    }
+
+
 
 
 
 
     useEffect(() => {
 
-        const res = axios.get("https://pokeapi.co/api/v2/pokemon")
+        axios.get(
+            `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=1000`)
             .then(res => {
-                setList(res.data.results);
+                setList(list ? [...list, ...res.data.results] : [...res.data.results]);
             })
             .catch((e) => console.log(e.message));
 
-    }, [])
+
+
+    }, [offset]);
+
+
     // dependency - params
 
 
@@ -36,18 +55,8 @@ export const Listings = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
     return (
-        <div className='h-96 w-full'>
+        <div className='w-full'>
 
 
 
@@ -55,17 +64,16 @@ export const Listings = () => {
             {
                 list ?
 
-                    <div className='grid grid-cols-2 py-10 gap-4 
+                    <div className='grid grid-cols-2 py-10 gap-8 
                                     sm:grid-cols-3
-                                    md:grid-cols-4 lg:grid-cols-5'>
+                                    lg:grid-cols-4 xl:grid-cols-5' >
 
 
 
 
                         {
-                            list.map((pokemon) => (
-
-                                <Card key={pokemon.name} pokemon={pokemon.name} />
+                            list.slice(0, 20).map((pokemon, idx) => (
+                                <Card key={idx} pokemon={pokemon} />
                             ))
                         }
 

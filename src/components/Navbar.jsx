@@ -1,23 +1,24 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export const Navbar = () => {
     return (
 
-        <div className='p-3 sm:p-10 rounded-b-2xl bg-blue-50'>
+        <div className='w-full p-3 sm:p-10 rounded-b-2xl bg-blue-50'>
 
             <div className='mx-auto flex justify-between'>
 
-                <p className='my-auto text-gray-800 text-3xl font-extrabold'>
+                <Link to="/" className='my-auto text-gray-800 text-3xl font-extrabold'>
                     Poke
                     <span className='text-violet-950'>
                     dex
                     </span>
-                </p>
+                </Link>
 
 
-                <div className='sm:border rounded-xl p-5 flex justify-between space-x-3 cursor-pointer sm:hover:bg-white duration-700'>
+                <div className='md:border rounded-xl p-5 flex justify-between space-x-3 cursor-pointer sm:hover:bg-white duration-700'>
 
-                    <p className='hidden sm:block text-gray-800'>Bookmarks</p>
+                    <Link to="/bookmarks" className='hidden md:block text-gray-800'>Bookmarks</Link>
 
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                         className="w-6 h-6">
