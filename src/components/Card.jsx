@@ -13,7 +13,7 @@ export const Card = ({ pokemon }) => {
     const [save, setSave] = useState(false);
     const [pic, setPic] = useState(null);
 
-    console.log(pokemon)
+   
 
 
     useEffect(() => {
@@ -39,7 +39,7 @@ export const Card = ({ pokemon }) => {
 
 
                 <div className='w-full -mt-10 '>
-                    <Link to={`/details/${pokemon}`}>
+                    <Link to={`/details/${pokemon.name}`}>
                         <img src={pic} className="" alt="" />
                     </Link>
                 </div>
