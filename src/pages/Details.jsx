@@ -39,7 +39,7 @@ export const Details = () => {
     }, []);
 
 
-
+    
   
 
 
@@ -49,13 +49,13 @@ export const Details = () => {
             <Navbar />
 
 
-            <div className='px-3 md:flex w-full border'>
+            <div className='px-3 md:flex w-full'>
 
 
 
-                <div className='relative mt-4 p-10 shrink-0 mx-auto'>
+                <div className='relative mt-4 sm:p-10 shrink-0 mx-auto'>
 
-                    <div className="p- w-72 rounded-xl shadow-2xl shadow-gray-300
+                    <div className="p-5 w-72 rounded-xl shadow-2xl shadow-gray-300
                         hover:skew-y-2 duration-700 mx-auto">
 
                         <img src={pokemon?.sprites?.other?.home?.front_default} className="" alt="" />
