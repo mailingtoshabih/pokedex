@@ -109,7 +109,7 @@ export const Navbar = () => {
             <div className='flex'>
 
                 <input type="text" placeholder="Charmander..."
-                    className='mt-10 bg-white h-12 text-gray-600 w-full rounded-l-xl p-5 outline-none font-extralight' onChange={(e) => setSearch(e.target.value)} />
+                    className='mt-10 bg-white h-12 text-gray-600 w-full rounded-l-xl p-5 outline-none font-extralight' onChange={(e) => setSearch(e.target.value.toLowerCase())} />
 
                 <div className='mt-10 h-12 p-3 bg-violet-950 text-white px-10 rounded-r-xl cursor-pointer
                     hover:bg-violet-900 hover:shadow-xl hover:shadow-violet-300 duration-700'
