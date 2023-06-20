@@ -39,8 +39,6 @@ export const Details = () => {
     }, []);
 
 
-    pokemon && console.log(pokemon)
-
 
   
 
@@ -57,7 +55,7 @@ export const Details = () => {
 
                 <div className='relative mt-4 p-10 shrink-0 mx-auto'>
 
-                    <div className="p-5 w-72 rounded-xl shadow-2xl shadow-gray-300
+                    <div className="p- w-72 rounded-xl shadow-2xl shadow-gray-300
                         hover:skew-y-2 duration-700 mx-auto">
 
                         <img src={pokemon?.sprites?.other?.home?.front_default} className="" alt="" />
