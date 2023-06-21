@@ -114,7 +114,9 @@ export const Navbar = () => {
                 <div className='mt-5 h-12 p-3 bg-violet-950 text-white px-10 rounded-r-xl cursor-pointer
                     hover:bg-violet-900 hover:shadow-xl hover:shadow-violet-300 duration-700'
                     onClick={handleSearch}>
+
                     Find
+                    
                 </div>
 
             </div>

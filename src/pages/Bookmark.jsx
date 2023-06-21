@@ -17,7 +17,7 @@ export const Bookmark = () => {
 
     useEffect(() => {
 
-        window.scroll(0,0);
+        window.scroll(0, 0);
 
         const local = { ...localStorage };
 
@@ -27,10 +27,6 @@ export const Bookmark = () => {
 
         setList(savedList)
     }, [])
-
-
-    
-
 
 
 
@@ -63,7 +59,7 @@ export const Bookmark = () => {
 
 
                     {
-                        
+                        !list?.length < 1 ?
 
                             <div className='grid grid-cols-2 py-10 gap-8 
                                 sm:grid-cols-3
@@ -74,13 +70,26 @@ export const Bookmark = () => {
 
                                 {
                                     list?.map((pokemon, idx) => (
-                                        <Savedcard key={idx} id={pokemon.id} pokemon={pokemon.v}  />
+                                        <Savedcard key={idx} id={pokemon.id} pokemon={pokemon.v} />
                                     ))
                                 }
 
                             </div>
+                            
+                            :
 
-                         
+                            <div>
+
+                                <p className='mt-40 mb-60 mx-auto w-fit font-bold text-3xl sm:text-5xl text-violet-400 animate-pulse text-center'>
+                                    Bookmarks Empty
+
+                                    <span className='text-xl font-extralight text-gray-800 block'>Add some pokemons...</span>
+                                </p>
+
+
+                            </div>
+
+
                     }
 
 
